@@ -1,8 +1,10 @@
 
 import './App.css'
+import FeaturedPYQSection from './components/FeaturepyqSection'
 import Footer from './components/Footer'
-import HeroSection from './components/Hero'
+// import HeroSection from './components/Hero'
 import Navbar from './components/Navbar'
+import PYQSection from './components/PYQSection'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -10,7 +12,9 @@ function App() {
   return (
     <>
     <Navbar/>
-    <HeroSection/>
+    <FeaturedPYQSection/>
+    <PYQSection/>
+    {/* <HeroSection/> */}
     <Footer/>
      
        
