@@ -1,25 +1,33 @@
+import "./App.css";
+import FeaturedPYQSection from "./components/FeaturepyqSection";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import PYQPage from "./components/PYQPage";
+import PYQSection from "./components/PYQSection";
 
-import './App.css'
-import FeaturedPYQSection from './components/FeaturepyqSection'
-import Footer from './components/Footer'
-// import HeroSection from './components/Hero'
-import Navbar from './components/Navbar'
-import PYQSection from './components/PYQSection'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
-    <>
-    <Navbar/>
-    <FeaturedPYQSection/>
-    <PYQSection/>
-    {/* <HeroSection/> */}
-    <Footer/>
-     
-       
-    </>
-  )
+    <Router>
+      <Navbar />
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <FeaturedPYQSection />
+              <PYQSection />
+            </>
+          }
+        />
+        <Route path="/pyqs/:subjectName" element={<PYQPage />} />
+      </Routes>
+
+      <Footer />
+    </Router>
+  );
 }
 
-export default App
+export default App;
