@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import PYQPage from "./components/PYQPage";
 import PYQSection from "./components/PYQSection";
+import SubjectYearPage from "./components/SubjectYearPage";
+
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -23,6 +25,11 @@ function App() {
           }
         />
         <Route path="/pyqs/:subjectName" element={<PYQPage />} />
+        <Route path="/pyqs/:subjectName/:companyName" element={<SubjectYearPage />} />
+        
+
+
+
       </Routes>
 
       <Footer />
