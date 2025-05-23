@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import PYQPage from "./components/PYQPage";
 import PYQSection from "./components/PYQSection";
 import SubjectYearPage from "./components/SubjectYearPage";
+import YearPdfPage from "./components/YearPdfPage";
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -26,6 +27,8 @@ function App() {
         />
         <Route path="/pyqs/:subjectName" element={<PYQPage />} />
         <Route path="/pyqs/:subjectName/:companyName" element={<SubjectYearPage />} />
+        <Route path="/pyqs/:subjectName/:companyName/:year" element={<YearPdfPage />} />
+
         
 
 
