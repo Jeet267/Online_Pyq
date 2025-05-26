@@ -6,6 +6,7 @@ import PYQPage from "./components/PYQPage";
 import PYQSection from "./components/PYQSection";
 import SubjectYearPage from "./components/SubjectYearPage";
 import YearPdfPage from "./components/YearPdfPage";
+import RecentAdded from "./components/Recentadded";
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -34,7 +35,8 @@ function App() {
 
 
       </Routes>
-
+      
+      <RecentAdded />
       <Footer />
     </Router>
   );
