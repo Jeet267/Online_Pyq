@@ -37,15 +37,20 @@ const RecentAdded = () => {
           >
             <div className="flex items-center gap-3">
               <FileText className="text-red-500 w-6 h-6" />
-              <span className="text-blue-700 hover:underline truncate font-medium">
+              <a
+                href={pdf.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700 hover:underline truncate font-medium"
+              >
                 {pdf.name}
-              </span>
+              </a>
             </div>
 
             <p className="text-xs text-gray-500">Last updated: {lastUpdated}</p>
             <p className="text-xs text-green-600 font-semibold">{price}</p>
 
-            <div className="flex gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-2">
               <button
                 onClick={() => handleAddToCart(pdf.name)}
                 className="text-sm px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-black rounded-md"
@@ -58,6 +63,7 @@ const RecentAdded = () => {
               >
                 Buy Now
               </button>
+
             </div>
           </div>
         ))}
@@ -67,4 +73,3 @@ const RecentAdded = () => {
 };
 
 export default RecentAdded;
-

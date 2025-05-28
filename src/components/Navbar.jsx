@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import AuthContainer from './AuthContainer';
+import React, { useState } from 'react';
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+import SigninModal from './SigninModal';
+import SignupModal from './SignupModal';
 
 const Navbar = () => {
-  const [showAuth, setShowAuth] = useState(false);
-  const [userName, setUserName] = useState(null);
-
-  useEffect(() => {
-    const name = localStorage.getItem('userName');
-    if (name) setUserName(name);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.clear();
-    setUserName(null);
-  };
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   return (
     <nav className="w-full bg-white shadow-md px-6 py-4 flex justify-between items-center">
@@ -25,33 +17,48 @@ const Navbar = () => {
         <li className="hover:text-blue-600 cursor-pointer">About</li>
         <li className="hover:text-blue-600 cursor-pointer">Contact</li>
 
-        {userName ? (
-          <>
-            <li className="text-blue-600 font-semibold">Welcome, {userName}</li>
-            <li
-              onClick={handleLogout}
-              className="cursor-pointer bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
-            >
-              Logout
-            </li>
-          </>
-        ) : (
-          <li
-            onClick={() => setShowAuth(true)}
-            className="cursor-pointer bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
-          >
-            Login / Signup
+        <SignedIn>
+          <li>
+            <UserButton afterSignOutUrl="/" />
           </li>
-        )}
+        </SignedIn>
+        
+        <SignedOut>
+          <li>
+            <button
+              onClick={() => setShowSignIn(true)}
+              className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => setShowSignUp(true)}
+              className="cursor-pointer border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50"
+            >
+              Sign Up
+            </button>
+          </li>
+        </SignedOut>
       </ul>
 
-      {showAuth && (
-        <AuthContainer
-          onClose={() => setShowAuth(false)}
-          onSigninSuccess={() => {
-            const name = localStorage.getItem('userName');
-            setUserName(name);
-            setShowAuth(false);
+      {showSignIn && (
+        <SigninModal
+          onClose={() => setShowSignIn(false)}
+          onSigninSuccess={() => setShowSignIn(false)}
+          switchToSignup={() => {
+            setShowSignIn(false);
+            setShowSignUp(true);
+          }}
+        />
+      )}
+
+      {showSignUp && (
+        <SignupModal
+          onClose={() => setShowSignUp(false)}
+          onSignupSuccess={() => setShowSignUp(false)}
+          switchToSignin={() => {
+            setShowSignUp(false);
+            setShowSignIn(true);
           }}
         />
       )}
