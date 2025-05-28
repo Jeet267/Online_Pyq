@@ -14,6 +14,8 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
+  SignIn,
+  SignUp,
 } from '@clerk/clerk-react'
 import SigninModal from './components/SigninModal'
 import SignupModal from './components/SignupModal'
@@ -105,6 +107,9 @@ function AppContent() {
 
 // This is the component that will be exported and includes ClerkProvider
 function App() {
+  const [showSignIn, setShowSignIn] = useState(false)
+  const [showSignUp, setShowSignUp] = useState(false)
+
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <AppContent />

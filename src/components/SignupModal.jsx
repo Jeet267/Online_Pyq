@@ -33,14 +33,17 @@ const SignupModal = ({ onClose, onSignupSuccess, switchToSignin }) => {
               footerActionText: "hidden",
               dividerRow: "hidden",
               dividerText: "hidden",
-              formFooter: "hidden"
+              formFooter: "hidden",
+              footerAction: "hidden",
+              alternativeMethodsSeparator: "hidden"
             },
             layout: {
               socialButtonsPlacement: "bottom",
               socialButtonsVariant: "iconButton",
               privacyPageUrl: "https://clerk.dev/privacy",
               termsPageUrl: "https://clerk.dev/terms",
-              showOptionalFields: false
+              showOptionalFields: false,
+              hideFooter: true
             },
           }}
         />
