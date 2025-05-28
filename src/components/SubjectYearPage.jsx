@@ -2,10 +2,22 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export default function SubjectYearPage() {
-  const years = [ 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011]
-  ;
+  const years = [
+    2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017,
+    2016, 2015, 2014, 2013, 2012, 2011
+  ];
+
   const { subjectName, companyName } = useParams();
   const navigate = useNavigate();
+  const price = '₹2';
+
+  const handleAddToCart = (year) => {
+    alert(`Added PYQ for ${subjectName} (${companyName}, ${year}) to cart.`);
+  };
+
+  const handleBuyNow = (year) => {
+    alert(`Proceeding to buy PYQ for ${subjectName} (${companyName}, ${year}).`);
+  };
 
   return (
     <section className="py-12 px-4 bg-white">
@@ -35,16 +47,31 @@ export default function SubjectYearPage() {
             {years.map((year) => (
               <div
                 key={year}
-                onClick={() =>
-                  navigate(`/pyqs/${subjectName}/${companyName}/${year}`)
-                }
-                className="cursor-pointer border border-gray-200 rounded-lg p-6 shadow hover:shadow-md transition text-center"
+                className="border border-gray-200 rounded-lg p-6 shadow hover:shadow-md transition text-center flex flex-col gap-3"
               >
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{year}</h3>
+                <h3
+                  onClick={() => navigate(`/pyqs/${subjectName}/${companyName}/${year}`)}
+                  className="text-xl font-semibold text-gray-800 mb-2 cursor-pointer hover:underline"
+                >
+                  {year}
+                </h3>
 
-                <span className="text-blue-600 hover:underline text-sm">
-                  View Papers
-                </span>
+                <p className="text-sm text-green-600 font-semibold">{price}</p>
+
+                <div className="flex justify-center gap-2 mt-auto">
+                  <button
+                    onClick={() => handleAddToCart(year)}
+                    className="text-sm px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-black rounded-md"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={() => handleBuyNow(year)}
+                    className="text-sm px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+                  >
+                    Buy Now
+                  </button>
+                </div>
               </div>
             ))}
           </div>

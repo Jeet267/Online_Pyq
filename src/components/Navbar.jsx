@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import SigninModal from './SigninModal';
-import SignupModal from './SignupModal';
+import AuthContainer from './AuthContainer';
 
 const Navbar = () => {
-  const [showSignup, setShowSignup] = useState(false);
-  const [showSignin, setShowSignin] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const [userName, setUserName] = useState(null);
 
   useEffect(() => {
@@ -13,9 +11,7 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userPassword');
-    localStorage.removeItem('userName');
+    localStorage.clear();
     setUserName(null);
   };
 
@@ -40,29 +36,22 @@ const Navbar = () => {
             </li>
           </>
         ) : (
-          <>
-            <li
-              onClick={() => setShowSignup(true)}
-              className="cursor-pointer bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
-            >
-              Signup
-            </li>
-            <li
-              onClick={() => setShowSignin(true)}
-              className="cursor-pointer bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
-            >
-              Signin
-            </li>
-          </>
+          <li
+            onClick={() => setShowAuth(true)}
+            className="cursor-pointer bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700"
+          >
+            Login / Signup
+          </li>
         )}
       </ul>
 
-      {showSignup && <SignupModal onClose={() => setShowSignup(false)} />}
-      {showSignin && (
-        <SigninModal
-          onClose={() => {
-            setShowSignin(false);
-            setUserName(localStorage.getItem('userName')); // update state after signin
+      {showAuth && (
+        <AuthContainer
+          onClose={() => setShowAuth(false)}
+          onSigninSuccess={() => {
+            const name = localStorage.getItem('userName');
+            setUserName(name);
+            setShowAuth(false);
           }}
         />
       )}
